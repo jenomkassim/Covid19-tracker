@@ -1,10 +1,11 @@
 import React from "react"
+import {Map as LeafletMap, TileLayer} from "react-leaflet"
 
 function Map() {
    return(
-       <h1>
-           This is a map
-       </h1>
+       <div>
+
+       </div>
    )
 }
 
