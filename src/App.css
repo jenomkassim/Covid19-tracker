@@ -2,9 +2,49 @@
   margin: 0;
 }
 
-.app__header{
+.app {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.app__left {
+    flex: 0.9;
+}
+
+.app__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.app__stats {
+    display: flex;
+    justify-content: space-between;
+}
+
+.table {
+    padding-top: 10px;
+    overflow-y: scroll;
+    height: 400px;
+    color: #6a5d5d;
+}
+
+.table tr{
+    display: flex;
+    justify-content: space-between;
+}
+
+.table td{
+    padding: 10px;
+}
+
+.table tr:nth-child(odd) {
+    background-color: #f3f2f8;
+}
+
+@media(max-width: 990px) {
+    .app {
+        flex-direction: column;
+    }
 }
