@@ -7,12 +7,15 @@ import Table from "./Table";
 import {sortData} from "./util";
 import LineGraph from "./LineGraph";
 import "leaflet/dist/leaflet.css"
+import "./Map.css"
 
 function App() {
     const [countries, setCountries] = useState([])
     const [country, setCountry] = useState('worldwide')
     const [countryInfo, setCountryInfo] = useState({})
     const [tableData, setTableData] = useState([])
+    const [center, setCenter] = useState({lat: 34.80746, lng: -40.4796})
+    const [zoom, setZoom] = useState(3)
 
     useEffect(() => {
         fetch("https://disease.sh/v3/covid-19/all")
@@ -29,7 +32,7 @@ function App() {
                 .then((data) => {
                     const countries = data.map((country) => ({
                         name: country.country, // NIGERIA
-                        value: country.countryInfo.iso2 // NG
+                        value: country.countryInfo.iso2, // NG
                     }))
 
                     const sortedData = sortData(data)
@@ -52,6 +55,8 @@ function App() {
             .then(data => {
                 setCountry(countryCode)
                 setCountryInfo(data)
+                setCenter([data.countryInfo.lat, data.countryInfo.long])
+                setZoom(4)
             })
     }
 
@@ -59,7 +64,7 @@ function App() {
     <div className="app">
         <div className="app__left">
             <div className="app__header">
-                <h1>Covid 19 tracker</h1>
+                <h1>Jenom's Covid 19 tracker</h1>
 
                 <FormControl className="app__dropdown">
                     <Select variant="outlined" value={country} onChange={onCountryChange}>
@@ -80,7 +85,7 @@ function App() {
             </div>
 
             <div className="app__map">
-                <Map />
+                <Map center={center} zoom={zoom} />
             </div>
         </div>
 
